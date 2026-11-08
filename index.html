@@ -1,0 +1,760 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Dora 🧸💗</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Georgia, serif;
+  background: linear-gradient(135deg,#fce4ec,#f8dff0,#e9d5f5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  color: #70465d;
+}
+
+.flower {
+  position: fixed;
+  font-size: 23px;
+  opacity: .5;
+  animation: float 8s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0%,100% {transform:translateY(0) rotate(0);}
+  50% {transform:translateY(-35px) rotate(20deg);}
+}
+
+.container {
+  width: 92%;
+  max-width: 480px;
+  text-align: center;
+  padding: 25px 0;
+  z-index: 2;
+}
+
+h1 {
+  font-size: 26px;
+  margin-bottom: 12px;
+  color: #a34f79;
+}
+
+.subtitle {
+  font-size: 14px;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+#envelopeScreen {
+  display: block;
+}
+
+.envelope {
+  width: 240px;
+  height: 160px;
+  background: #e9a9c5;
+  margin: 65px auto 30px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 12px 30px #a65e8060;
+  transition: .5s;
+}
+
+.envelope:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-left: 120px solid transparent;
+  border-right: 120px solid transparent;
+  border-top: 95px solid #d982a9;
+  transform-origin: top;
+  transition: .6s;
+  z-index: 3;
+}
+
+.envelope:after {
+  content: "♥";
+  position: absolute;
+  font-size: 38px;
+  color: white;
+  top: 65px;
+  left: 101px;
+  z-index: 4;
+}
+
+.envelope.open:before {
+  transform: rotateX(180deg);
+}
+
+.envelope.open {
+  transform: translateY(20px);
+}
+
+.tap {
+  font-size: 15px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  50% {opacity:.45;}
+}
+
+#letterScreen {
+  display: none;
+  animation: appear .8s ease;
+}
+
+@keyframes appear {
+  from {opacity:0;transform:translateY(20px);}
+  to {opacity:1;transform:translateY(0);}
+}
+
+.paper {
+  background: #fffaf7;
+  padding: 27px 22px;
+  border-radius: 12px;
+  box-shadow: 0 10px 35px #9b648344;
+  min-height: 460px;
+  position: relative;
+  border: 1px solid #f3d4df;
+}
+
+.paper:before {
+  content: "✿";
+  position: absolute;
+  top: 9px;
+  right: 15px;
+  color: #df9ab7;
+  font-size: 23px;
+}
+
+.page {
+  display: none;
+  animation: appear .4s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+.page h2 {
+  color: #b35c83;
+  font-size: 22px;
+  margin: 15px 0 22px;
+}
+
+.page p {
+  font-size: 15px;
+  line-height: 1.9;
+  text-align: left;
+  white-space: pre-line;
+}
+
+.page .center {
+  text-align: center;
+}
+
+.decoration {
+  font-size: 25px;
+  margin: 18px 0;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  gap: 12px;
+}
+
+button {
+  border: none;
+  padding: 12px 22px;
+  border-radius: 25px;
+  background: #d987ac;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+button:disabled {
+  opacity: .4;
+}
+
+#pageNumber {
+  margin-top: 17px;
+  font-size: 12px;
+  color: #b17b94;
+}
+
+.music {
+  margin-top: 18px;
+  font-size: 13px;
+}
+
+.music button {
+  padding: 8px 18px;
+  background: #a96e91;
+}
+
+.ending {
+  color: #b34e7c;
+  font-size: 19px !important;
+  text-align: center !important;
+  line-height: 1.9 !important;
+}
+
+.heart {
+  position: fixed;
+  bottom: -30px;
+  animation: rise 6s linear forwards;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes rise {
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media(max-width:380px) {
+  .paper {padding:24px 17px;}
+  .page p {font-size:14px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="flower" style="top:8%;left:7%">🌷</div>
+<div class="flower" style="top:20%;right:8%">✿</div>
+<div class="flower" style="bottom:15%;left:8%">🌸</div>
+<div class="flower" style="bottom:8%;right:9%">🌷</div>
+
+<div class="container">
+
+<!-- ENVELOPE -->
+
+<div id="envelopeScreen">
+
+<h1>For My Dora 🧸</h1>
+
+<p class="subtitle">
+A little reminder for the days you forget how loved you are.
+</p>
+
+<div class="envelope"
+id="envelope"
+onclick="openLetter()">
+</div>
+
+<p class="tap">
+♡ Tap the envelope to open your letter ♡
+</p>
+
+</div>
+
+<!-- LETTER -->
+
+<div id="letterScreen">
+
+<h1>A Little Reminder That You're Loved 💗</h1>
+
+<div class="paper">
+
+<!-- PAGE 1 -->
+
+<div class="page active">
+
+<h2>01. Dear Dora 🌷</h2>
+
+<p>
+Hey Doraaaaa,
+
+I don't really know where to begin, but I know why I'm writing this.
+
+I heard about what happened, and I wish I could make you understand something that you might not be able to see right now.
+
+One argument, one difficult day, or one moment of feeling like you've failed cannot define an entire person.
+
+And especially not you.
+
+So consider these pages a little reminder from someone who is genuinely thankful that you exist in his life.
+
+Your Proton has something to say. ♡
+</p>
+
+<div class="decoration">🌷 🧸 🌷</div>
+</div>
+
+<!-- PAGE 2 -->
+
+<div class="page">
+
+<h2>02. You're Not A Failure</h2>
+
+<p>
+Dora,
+
+Please don't let a disagreement convince you that you're failing at life.
+
+You're human. You have emotions, expectations, limitations and days when things don't go as planned.
+
+Sometimes we say things we don't mean. Sometimes we misunderstand people we love. Sometimes we don't know how to handle a situation.
+
+That doesn't make us bad people.
+
+You can acknowledge your mistakes without turning them into your identity.
+
+You can apologise when necessary without believing that you're worthless.
+
+Please learn to separate what happened from who you are.
+
+Because you are so much more than one argument.
+</p>
+
+<div class="decoration">🦋</div>
+</div>
+
+<!-- PAGE 3 -->
+
+<div class="page">
+
+<h2>03. If Only You Could See Yourself</h2>
+
+<p>
+I genuinely wish you could borrow my eyes for just a minute.
+
+Maybe then you'd understand why I appreciate you so much.
+
+You keep questioning yourself, but I see someone whose existence has made a difference in my life.
+
+Someone who made ordinary conversations memorable.
+
+Someone whose presence became a little part of my everyday happiness.
+
+You might notice your flaws first, but I don't look at you as a collection of mistakes.
+
+I see a human being who deserves patience, kindness, respect and love.
+
+And I hope one day you learn to see yourself with that same kindness.
+</p>
+
+<div class="decoration">💗 🌸</div>
+</div>
+
+<!-- PAGE 4 -->
+
+<div class="page">
+
+<h2>04. You Don't Have To Be Strong Always</h2>
+
+<p>
+Listen, Dora.
+
+You don't have to be the strong one every single day.
+
+You don't have to pretend everything is fine when it isn't.
+
+You don't have to keep smiling just because people are used to seeing you smile.
+
+You're allowed to be tired.
+
+You're allowed to cry, take a break, ask for help and admit that something hurts.
+
+Being strong doesn't mean never struggling.
+
+And please remember, you don't have to earn affection by being useful, successful or perfect.
+
+You deserve kindness even when you have absolutely nothing to give.
+</p>
+
+<div class="decoration">☁️ 🌷 ☁️</div>
+</div>
+
+<!-- PAGE 5 -->
+
+<div class="page">
+
+<h2>05. About Your Little World</h2>
+
+<p>
+I know that sometimes relationships at home can become complicated.
+
+Especially when the people you love are involved.
+
+But please don't allow a difficult relationship or a disagreement to become the measurement of your entire worth.
+
+You and your sister are two different individuals, both learning and growing.
+
+There will be disagreements. There will be misunderstandings.
+
+You can love someone and still disagree with them.
+
+Give yourself time to understand what happened. Give her time too.
+
+You don't have to solve every complicated feeling today.
+
+One day at a time, Dora. ♡
+</p>
+
+<div class="decoration">🕊️</div>
+</div>
+
+<!-- PAGE 6 -->
+
+<div class="page">
+
+<h2>06. What You Mean To Me</h2>
+
+<p>
+Now comes something I don't think I say enough.
+
+Thank you for entering my life.
+
+You might consider yourself just another person going through ordinary days, but you became someone genuinely important to me.
+
+You changed me in ways I probably cannot explain properly.
+
+Remember how I say you changed me from an electron to a proton?
+
+Well, there's a reason behind that silly little comparison.
+
+You brought a different kind of positivity into my world.
+
+And I'm genuinely grateful for every conversation, every laugh, every random moment and every little memory.
+
+I'm glad I got to know you, Dora.
+
+More than you probably realise.
+</p>
+
+<div class="decoration">⚛️ ❤️</div>
+</div>
+
+<!-- PAGE 7 -->
+
+<div class="page">
+
+<h2>07. On Your Difficult Days</h2>
+
+<p>
+Whenever you feel like you're not enough, please remember:
+
+You are allowed to make mistakes and still deserve respect.
+
+You are allowed to have a bad day without calling yourself a failure.
+
+You are allowed to grow at your own pace.
+
+You are allowed to change your mind.
+
+You are allowed to ask someone to listen without feeling guilty about it.
+
+And you are allowed to receive the same care that you give others.
+
+I cannot promise that every day will be beautiful.
+
+But I hope you never forget that a difficult day doesn't make your whole life a difficult one.
+
+There's still so much waiting for you.
+</p>
+
+<div class="decoration">🌻</div>
+</div>
+
+<!-- PAGE 8 -->
+
+<div class="page">
+
+<h2>08. A Promise From Your Proton</h2>
+
+<p>
+I don't know what the future holds for either of us.
+
+Life might take us through different roads.
+
+Circumstances might change. Our routines might change. We might have disagreements and misunderstandings too.
+
+But I don't want you to ever feel that your value in my eyes depends on how perfectly everything goes.
+
+I'll always wish good things for you.
+
+I'll always want to see you growing, succeeding and discovering how much you're capable of.
+
+And whenever you need a reminder of your worth, I hope you remember that you have a friend who genuinely believes in you.
+
+No conditions of perfection.
+
+Just genuine friendship and care.
+</p>
+
+<div class="decoration">🤍</div>
+</div>
+
+<!-- PAGE 9 -->
+
+<div class="page">
+
+<h2>09. Read This Twice, Dora</h2>
+
+<p>
+If someday you forget how special you are, read this again.
+
+If someday you feel like you've disappointed everyone, read this again.
+
+If someday you think you're difficult to love, read this again.
+
+You don't need to become someone else to deserve happiness.
+
+You don't need to achieve something extraordinary to justify your existence.
+
+You don't need to be everyone's favourite person.
+
+Just be yourself. Keep learning. Keep growing. Keep giving yourself chances.
+
+And please, if things ever feel too heavy, talk to someone you trust. You deserve support beyond these pages too.
+
+The world is much bigger than the problems you're facing today.
+
+And your story is nowhere near finished.
+</p>
+
+<div class="decoration">🌸 🦋 🌸</div>
+</div>
+
+<!-- PAGE 10: DIWALI -->
+
+<div class="page">
+
+<h2>10. Happyyy Diwali, Dora! 🪔</h2>
+
+<p>
+Happyyy Diwali, Doraaaaa! 🪔✨
+
+I hope this Diwali brings you the kind of happiness that stays long after the lights fade.
+
+May your home be filled with warmth, your heart with peace, and your days with countless reasons to smile.
+
+I hope every little diya reminds you that even the smallest light can make a difference in the darkest surroundings.
+
+May Maa Lakshmi bless you with happiness, prosperity and good health, and may every new beginning bring you closer to the life you dream of.
+
+Forget your worries for a little while. Enjoy the sweets, the lights, the decorations and all those little moments.
+
+You deserve beautiful things, Dora.
+
+And this Diwali, my wish isn't just that you shine brightly for everyone else.
+
+I wish you find peace and happiness within yourself too.
+
+Lots of love and warm Diwali wishes from your Proton! ⚛️
+</p>
+
+<div class="decoration">🪔 🌸 ✨ 🪔</div>
+</div>
+
+<!-- PAGE 11: FINAL PROMISE -->
+
+<div class="page">
+
+<h2>11. Till I'm Alive ❤️</h2>
+
+<p class="ending">
+Dora,
+
+If there's one thing I want you to take away from these eleven pages, it's this:
+
+Whatever life takes away,
+whatever circumstances change,
+and wherever our roads lead...
+
+Till I'm alive, you're always loved.
+
+I GUARANTEE THAT.
+
+You'll always have someone who sees you with love, believes in you, and is genuinely grateful for your existence.
+
+You are not a failure.
+
+You are not a burden.
+
+You are not someone whose worth can be decided by a bad day.
+
+You're my Dora.
+
+And I hope you never give up on yourself.
+
+Thank you for being a part of my life.
+
+With all the appreciation,
+care and friendship,
+
+YOUR PROTON ⚛️
+
+Forever grateful for you. ♡
+</p>
+
+<div class="decoration">
+💗 🌷 🧸 🪔
+</div>
+
+</div>
+
+<!-- NAVIGATION -->
+
+<div class="navigation">
+
+<button id="prev"
+onclick="changePage(-1)"
+disabled>
+← Previous
+</button>
+
+<button id="next"
+onclick="changePage(1)">
+Next →
+</button>
+
+</div>
+
+<div id="pageNumber">Page 1 of 11</div>
+
+</div>
+
+<!-- MUSIC -->
+
+<div class="music">
+
+🎵 A little melody for you
+
+<br><br>
+
+<button onclick="toggleMusic()" id="musicBtn">
+Ⅱ Pause Music
+</button>
+
+</div>
+
+<audio id="song" src="song.mp3" loop></audio>
+
+</div>
+</div>
+
+<script>
+
+let currentPage = 0;
+
+const pages = document.querySelectorAll(".page");
+
+const song = document.getElementById("song");
+
+let heartTimer = null;
+
+function openLetter() {
+
+document.getElementById("envelope").classList.add("open");
+
+setTimeout(() => {
+
+document.getElementById("envelopeScreen").style.display = "none";
+
+document.getElementById("letterScreen").style.display = "block";
+
+song.volume = 0.65;
+
+song.play().catch(() => {
+document.getElementById("musicBtn").innerText = "▶ Play Music";
+});
+
+heartTimer = setInterval(createHeart, 1100);
+
+}, 700);
+
+}
+
+function changePage(direction) {
+
+pages[currentPage].classList.remove("active");
+
+currentPage += direction;
+
+pages[currentPage].classList.add("active");
+
+document.getElementById("prev").disabled =
+currentPage === 0;
+
+document.getElementById("next").disabled =
+currentPage === pages.length - 1;
+
+document.getElementById("next").innerText =
+currentPage === pages.length - 1
+? "Finished ♡"
+: "Next →";
+
+document.getElementById("pageNumber").innerText =
+`Page ${currentPage + 1} of ${pages.length}`;
+
+}
+
+function toggleMusic() {
+
+if(song.paused) {
+
+song.play();
+
+document.getElementById("musicBtn").innerText =
+"Ⅱ Pause Music";
+
+} else {
+
+song.pause();
+
+document.getElementById("musicBtn").innerText =
+"▶ Play Music";
+
+}
+
+}
+
+function createHeart() {
+
+const heart = document.createElement("div");
+
+heart.className = "heart";
+
+heart.innerText =
+["♡","♥","🌸","✿","✨"][Math.floor(Math.random()*5)];
+
+heart.style.left = Math.random()*100 + "vw";
+
+heart.style.fontSize =
+(15 + Math.random()*17) + "px";
+
+document.body.appendChild(heart);
+
+setTimeout(() => heart.remove(), 6000);
+
+}
+
+</script>
+
+</body>
+</html>
+
